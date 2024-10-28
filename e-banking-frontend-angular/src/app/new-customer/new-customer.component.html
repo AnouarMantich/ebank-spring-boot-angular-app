@@ -1,0 +1,32 @@
+<div class="container mt-2 ">
+  <div class="card">
+    <div class="card-header">new Customer</div>
+    <div class="card-body">
+      <form  [formGroup]="saveCustomerForm" (ngSubmit)="handleSaveCustomer()" >
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="email" class="form-control" id="name" aria-describedby="name" formControlName="name">
+          <span class="text-danger"
+          *ngIf="!saveCustomerForm.controls['name'].untouched
+                 && saveCustomerForm.controls['name'].errors
+               ">
+            {{ saveCustomerForm.controls['name'].errors!['required'] && 'this input is required' }}
+            {{ saveCustomerForm.controls['name'].errors!['minlength'] && 'the name must contain at least 2 characters' }}
+          </span>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+          <span class="text-danger"
+                *ngIf="!saveCustomerForm.controls['email'].untouched
+                 && saveCustomerForm.controls['email'].errors
+               ">
+            {{ saveCustomerForm.controls['email'].errors!['required'] && 'this input is required' }}
+            {{ saveCustomerForm.controls['email'].errors!['email'] && 'this address is invalid' }}
+          </span>
+        </div>
+        <button [disabled]="!saveCustomerForm.valid"  type="submit" class="btn btn-primary">Save</button>
+      </form>
+  </div>
+</div>
+</div>

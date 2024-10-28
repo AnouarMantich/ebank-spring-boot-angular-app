@@ -1,0 +1,57 @@
+<div class="container-fluid mt-3">
+  <div class="row align-items-start" *ngIf="customerAccounts">
+    <div class="col">
+      <div class="card" >
+        <div class="card-header">Customer infos</div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Customer Id : </strong> {{customerAccounts.customer.id }}
+            </li>
+            <li class="list-group-item">
+              <strong>Customer Name : </strong> {{customerAccounts.customer.name }}
+            </li>
+            <li class="list-group-item">
+              <strong>Customer email : </strong> {{customerAccounts.customer.email }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card " *ngIf="authService.roles.includes('ADMIN')" >
+        <div class="card-header">Customer BankAccounts</div>
+        <div class="card-body" >
+          <div class="card mb-3" *ngFor="let bankAccount of customerAccounts.bankAccounts">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <strong>Customer Id : </strong> <a routerLink="/accounts/{{bankAccount.id}}" class="btn btn-secondary">{{bankAccount.id}}</a>
+                </li>
+                <li class="list-group-item">
+                  <strong>Created at : </strong> {{bankAccount.createdAt | date }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Balance : </strong> {{bankAccount.balance}}
+                </li>
+                <li class="list-group-item">
+                  <strong>Status : </strong> {{bankAccount.status}}
+                </li>
+                <li class="list-group-item">
+                  <strong>type : </strong> {{bankAccount.type}}
+                </li>
+                <li class="list-group-item" *ngIf="bankAccount.overdraft">
+                  <strong> Overdraw : </strong> {{bankAccount.overdraft}}
+                </li>
+                <li class="list-group-item" *ngIf="bankAccount.interestRate">
+                  <strong>Interest Rate : </strong> {{bankAccount.interestRate}}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

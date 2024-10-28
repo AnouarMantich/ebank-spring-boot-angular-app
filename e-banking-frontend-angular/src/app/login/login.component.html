@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">Authentication
+      <div class="card-body">
+        <form  [formGroup]="formLogin" (ngSubmit)="handleLogin()" >
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" class="form-control" formControlName="username">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="password">
+          </div>
+          <button type="submit" class="btn btn-success" >Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

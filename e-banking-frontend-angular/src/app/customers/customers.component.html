@@ -1,0 +1,44 @@
+<div class="container mt-2">
+  <div class="text-warning" *ngIf="loading">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-warning" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="text-danger" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+  <div class="card" *ngIf="customers">
+    <div class="card-header d-flex justify-content-between">
+      <h3>Customers</h3>
+      <form class="d-flex" (ngSubmit)="handleSearchCustomers()" [formGroup]="customerSearchForm" >
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" formControlName="keyword">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col"  *ngIf="authService.roles.includes('ADMIN')">delete</th>
+          <th scope="col">Client Accounts</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let customer of customers">
+          <th scope="row" >{{customer.id}}</th>
+          <td>{{customer.name}}</td>
+          <td>{{customer.email}}</td>
+          <td  *ngIf="authService.roles.includes('ADMIN')" ><button class="btn btn-danger" (click)="handleDeleteCustomer(customer.id)"     ><i class="bi bi-trash"></i></button></td>
+          <td><button class="btn btn-success" (click)="checkClientAccounts(customer.id)" ><i class="bi bi-wallet2"></i></button></td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
